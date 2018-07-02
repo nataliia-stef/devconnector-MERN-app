@@ -8,6 +8,7 @@ const passport = require('passport');
 
 //Load input validation
 const validateRegisterInput = require('../../validation/register');
+const validateLoginInput = require('../../validation/login');
 
 //load User model
 const User = require('../../models/User');
@@ -64,6 +65,13 @@ router.post('/register', (req, res) => {
 //@desc    Login User / Returning JWT token
 //@acess   Public
 router.post('/login', (req, res) => {
+  const { errors, isValid } = validateLoginInput(req.body);
+
+  //Check Validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   const email = req.body.email;
   const password = req.body.password;
 
@@ -71,7 +79,8 @@ router.post('/login', (req, res) => {
   User.findOne({ email: email }).then(user => {
     //Check for user
     if (!user) {
-      return res.status(400).json({ msg: 'User not found' });
+      errors.email = 'User not found';
+      return res.status(400).json(errors);
     }
     //Check password
     bcrypt.compare(password, user.password).then(isMatch => {
@@ -93,9 +102,8 @@ router.post('/login', (req, res) => {
           }
         );
       } else {
-        return res
-          .status(400)
-          .json({ msg: "Password and email doesn't match!" });
+        errors.password = "Password and email doesn't match!";
+        return res.status(400).json(errors);
       }
     });
   });
