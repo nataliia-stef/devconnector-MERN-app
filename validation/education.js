@@ -21,6 +21,8 @@ module.exports = function validateEducationInput(data) {
     errors.fieldofstudy = 'Field of study is required';
   }
 
+  //TODO: CHECK IF FROM IS A VALID DATE
+
   if (Validator.isEmpty(data.from)) {
     errors.from = 'From date field is required';
   }

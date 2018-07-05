@@ -20,6 +20,10 @@ module.exports = function validateExperienceInput(data) {
     errors.from = 'From date field is required';
   }
 
+  if (!Validator.isISO8601(data.from)) {
+    errors.from = 'From field should be a date in a format YYYY-MM-DD';
+  }
+
   return {
     errors: errors,
     isValid: isEmpty(errors)
