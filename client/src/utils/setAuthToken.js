@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { DEFAULT_ECDH_CURVE } from 'tls';
 
 const setAuthToken = token => {
   if (token) {
