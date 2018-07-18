@@ -123,8 +123,12 @@ router.post(
     //Get fields
     const profileFields = {};
     profileFields.user = req.user.id;
-    if (req.body.handle) profileFields.handle = req.body.handle;
-    if (req.body.company) profileFields.company = req.body.company;
+    req.body.handle
+      ? (profileFields.handle = req.body.handle)
+      : (profileFields.handle = '');
+    req.body.company
+      ? (profileFields.company = req.body.company)
+      : (profileFields.company = '');
     if (req.body.website) profileFields.website = req.body.website;
     if (req.body.location) profileFields.location = req.body.location;
     if (req.body.bio) profileFields.bio = req.body.bio;

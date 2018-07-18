@@ -5,6 +5,7 @@ import {
   CLEAR_CURRENT_PROFILE,
   GET_ERRORS
 } from './types';
+import { logoutUser } from './authAction';
 
 export const getCurrentProfile = () => dispatch => {
   dispatch(setProfileLoading());
@@ -44,4 +45,16 @@ export const createProfile = (profileData, history) => dispatch => {
     .post('/api/profile', profileData)
     .then(res => history.push('/dashboard'))
     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};
+
+//Delete account and profile
+export const deleteAccount = () => dispatch => {
+  if (window.confirm("Are you sure? This CAN'T BE UNDONE")) {
+    axios
+      .delete('/api/profile')
+      .then(res => {
+        dispatch(logoutUser());
+      })
+      .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+  }
 };
