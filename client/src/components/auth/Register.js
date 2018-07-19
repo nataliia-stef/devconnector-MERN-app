@@ -30,7 +30,7 @@ class Register extends Component {
     }
   }
 
-  onChange = e => {
+  onChangeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -65,7 +65,7 @@ class Register extends Component {
                   name="name"
                   type="text"
                   value={this.state.name}
-                  onChange={this.onChange}
+                  onChange={this.onChangeHandler}
                   error={errors.name}
                 />
                 <TextFieldGroup
@@ -73,7 +73,7 @@ class Register extends Component {
                   name="email"
                   type="email"
                   value={this.state.email}
-                  onChange={this.onChange}
+                  onChange={this.onChangeHandler}
                   error={errors.email}
                   info="This site uses Gravatar so if you want a profile image, use
                 a Gravatar email"
@@ -83,7 +83,7 @@ class Register extends Component {
                   name="password"
                   type="password"
                   value={this.state.password}
-                  onChange={this.onChange}
+                  onChange={this.onChangeHandler}
                   error={errors.password}
                 />
                 <TextFieldGroup
@@ -91,7 +91,7 @@ class Register extends Component {
                   name="password2"
                   type="password"
                   value={this.state.password2}
-                  onChange={this.onChange}
+                  onChange={this.onChangeHandler}
                   error={errors.password2}
                 />
 
@@ -111,10 +111,18 @@ Register.propTypes = {
   errors: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth,
-  errors: state.errors
-});
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+    errors: state.errors
+  };
+};
+
+// alternative syntax
+// const mapStateToProps = state => ({
+//   auth: state.auth,
+//   errors: state.errors
+// });
 
 export default connect(
   mapStateToProps,

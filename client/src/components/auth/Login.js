@@ -15,7 +15,7 @@ class Login extends Component {
     };
   }
 
-  onChange = e => {
+  onChangeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -61,7 +61,7 @@ class Login extends Component {
                   name="email"
                   type="email"
                   value={this.state.email}
-                  onChange={this.onChange}
+                  onChange={this.onChangeHandler}
                   error={errors.email}
                 />
                 <TextFieldGroup
@@ -69,7 +69,7 @@ class Login extends Component {
                   name="password"
                   type="password"
                   value={this.state.password}
-                  onChange={this.onChange}
+                  onChange={this.onChangeHandler}
                   error={errors.password}
                 />
                 <input type="submit" className="btn btn-info btn-block mt-4" />

@@ -31,13 +31,24 @@ class CreateProfile extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
+  static getDerivedStateFromProps(props, state) {
+    if (props.errors !== state.errors) {
+      console.log('new props');
+      return {
+        errors: props.errors
+      };
     }
+    return null;
+  }
 
-    if (nextProps.profile.profile) {
-      const profile = nextProps.profile.profile;
+  onChangeHandler = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  componentDidMount() {
+    this.props.getCurrentProfile();
+    if (!isEmpty(this.props.profile.profile)) {
+      const profile = this.props.profile.profile;
 
       //Bring skills array back to comma separated values
       const skills = profile.skills.join(',');
@@ -78,14 +89,6 @@ class CreateProfile extends Component {
         instagram
       });
     }
-  }
-
-  onChangeHandler = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  componentDidMount() {
-    this.props.getCurrentProfile();
   }
 
   onSubmitHandler = e => {
