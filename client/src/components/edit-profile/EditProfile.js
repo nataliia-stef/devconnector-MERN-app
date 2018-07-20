@@ -33,7 +33,6 @@ class CreateProfile extends Component {
 
   static getDerivedStateFromProps(props, state) {
     if (props.errors !== state.errors) {
-      console.log('new props');
       return {
         errors: props.errors
       };
