@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
 import ProfileActions from './ProfileActions';
+import Experience from './Experience';
+import Education from './Education';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -25,6 +27,7 @@ class Dashboard extends Component {
       dashboardContent = <Spinner />;
     } else {
       //check if logged in user has profile data
+      //USER HAS PROFILE
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
           <div>
@@ -33,7 +36,8 @@ class Dashboard extends Component {
               <Link to={`/profile/${profile.handle}`}> {user.name}</Link>
             </p>
             <ProfileActions />
-            {/* TO DO EXPERIENCE AND EDUCATION  */}
+            <Experience experience={profile.experience} />
+            <Education education={profile.education} />
             <div style={{ marginBottom: '60px' }} />
             <button
               onClick={() => this.onDeleteHandler()}

@@ -63,6 +63,22 @@ export const addEducation = (eduData, history) => dispatch => {
     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };
 
+//Delete experience
+export const deleteExperience = expID => dispatch => {
+  axios
+    .delete(`/api/profile/experience/${expID}`)
+    .then(res => dispatch({ type: GET_PROFILE, payload: res.data }))
+    .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};
+
+//Delete education
+export const deleteEducation = eduID => dispatch => {
+  axios
+    .delete(`/api/profile/education/${eduID}`)
+    .then(res => dispatch({ type: GET_PROFILE, payload: res.data }))
+    .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};
+
 //Delete account and profile
 export const deleteAccount = () => dispatch => {
   if (window.confirm("Are you sure? This CAN'T BE UNDONE")) {
