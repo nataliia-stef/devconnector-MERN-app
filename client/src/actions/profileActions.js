@@ -4,11 +4,14 @@ import {
   PROFILE_LOADING,
   CLEAR_CURRENT_PROFILE,
   GET_ERRORS,
-  GET_PROFILES
+  GET_PROFILES,
+  CLEAR_ERRORS
 } from './types';
 import { logoutUser } from './authAction';
 
+//Get Current Profile
 export const getCurrentProfile = () => dispatch => {
+  dispatch(clearErrors());
   dispatch(setProfileLoading());
   axios
     .get('/api/profile')
@@ -21,7 +24,34 @@ export const getCurrentProfile = () => dispatch => {
     .catch(res =>
       dispatch({
         type: GET_PROFILE,
-        payload: {}
+        payload: null
+      })
+    );
+};
+
+//Clear all errors
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS,
+    payload: {}
+  };
+};
+
+//Get Profile by handle
+export const getProfileByHandle = handle => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get(`/api/profile/handle/${handle}`)
+    .then(res =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      })
+    )
+    .catch(res =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: null
       })
     );
 };
