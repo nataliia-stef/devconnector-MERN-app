@@ -41,12 +41,21 @@ export const clearCurrentProfile = () => {
 };
 
 //Create profile
-export const createProfile = (profileData, history) => dispatch => {
-  axios
-    .post('/api/profile', profileData)
-    .then(res => history.push('/dashboard'))
-    .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
-};
+// export const createProfile = (profileData, history) => dispatch => {
+//   axios
+//     .post('/api/profile', profileData)
+//     .then(res => history.push('/dashboard'))
+//     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+// };
+
+export function createProfile(profileData, history) {
+  return function(dispatch) {
+    axios
+      .post('/api/profile', profileData)
+      .then(res => history.push('/dashboard'))
+      .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+  };
+}
 
 //Add experience
 export const addExperience = (expData, history) => dispatch => {

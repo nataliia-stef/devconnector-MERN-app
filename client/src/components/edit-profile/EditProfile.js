@@ -61,7 +61,6 @@ class CreateProfile extends Component {
         bio = '',
         handle = '',
         status = 0,
-        social = {},
         social: {
           twitter = '',
           facebook = '',
