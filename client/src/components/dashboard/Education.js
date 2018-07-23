@@ -5,9 +5,9 @@ import { deleteEducation } from '../../actions/profileActions';
 import Moment from 'react-moment';
 
 class Education extends Component {
-  onDeleteHandler = educationID => {
-    this.deleteEducation(educationID);
-  };
+  onDeleteHandler(educationID) {
+    this.props.deleteEducation(educationID);
+  }
 
   render() {
     const education = this.props.education.map(education => {

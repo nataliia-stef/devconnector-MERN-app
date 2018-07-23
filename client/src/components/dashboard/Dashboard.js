@@ -33,6 +33,7 @@ class Dashboard extends Component {
           </p>
           <ProfileActions />
           <Experience experience={profile.experience} />
+          <div className="mt-4" />
           <Education education={profile.education} />
           <div style={{ marginBottom: '60px' }} />
           <button
