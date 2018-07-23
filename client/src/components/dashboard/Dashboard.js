@@ -23,43 +23,39 @@ class Dashboard extends Component {
 
     let dashboardContent;
 
-    if (profile === null || loading) {
-      dashboardContent = <Spinner />;
+    //check if logged in user has profile data
+    //USER HAS PROFILE
+    if (profile) {
+      dashboardContent = (
+        <div>
+          <p className="lead text-muted">
+            Welcome <Link to={`/profile/${profile.handle}`}> {user.name}</Link>
+          </p>
+          <ProfileActions />
+          <Experience experience={profile.experience} />
+          <Education education={profile.education} />
+          <div style={{ marginBottom: '60px' }} />
+          <button
+            onClick={() => this.onDeleteHandler()}
+            className="btn btn-danger"
+          >
+            Delete My Account
+          </button>
+        </div>
+      );
     } else {
-      //check if logged in user has profile data
-      //USER HAS PROFILE
-      if (Object.keys(profile).length > 0) {
-        dashboardContent = (
-          <div>
-            <p className="lead text-muted">
-              Welcome{' '}
-              <Link to={`/profile/${profile.handle}`}> {user.name}</Link>
-            </p>
-            <ProfileActions />
-            <Experience experience={profile.experience} />
-            <Education education={profile.education} />
-            <div style={{ marginBottom: '60px' }} />
-            <button
-              onClick={() => this.onDeleteHandler()}
-              className="btn btn-danger"
-            >
-              Delete My Account
-            </button>
-          </div>
-        );
-      } else {
-        //User is logged in but has no profile
-        dashboardContent = (
-          <div>
-            <p className="lead text-muted">Welcome {user.name}</p>
-            <p>You have not yet set up your profile! Please add some info.</p>
-            <Link to="/create-profile" className="btn btn-lg btn-info">
-              Create Profile
-            </Link>
-          </div>
-        );
-      }
+      //User is logged in but has no profile
+      dashboardContent = (
+        <div>
+          <p className="lead text-muted">Welcome {user.name}</p>
+          <p>You have not yet set up your profile! Please add some info.</p>
+          <Link to="/create-profile" className="btn btn-lg btn-info">
+            Create Profile
+          </Link>
+        </div>
+      );
     }
+
     return (
       <div className="dashboard">
         <div className="container">
