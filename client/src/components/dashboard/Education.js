@@ -43,18 +43,22 @@ class Education extends Component {
     return (
       <div>
         <h4 className="mb-4">Education Credentials</h4>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>School</th>
-              <th>Degree</th>
-              <th>Field of Study</th>
-              <th>Years</th>
-              <th>{''}</th>
-            </tr>
-          </thead>
-          <tbody>{education}</tbody>
-        </table>
+        {education.length > 0 ? (
+          <table className="table">
+            <thead>
+              <tr>
+                <th>School</th>
+                <th>Degree</th>
+                <th>Field of Study</th>
+                <th>Years</th>
+                <th>{''}</th>
+              </tr>
+            </thead>
+            <tbody>{education}</tbody>
+          </table>
+        ) : (
+          <span>No Education Added</span>
+        )}
       </div>
     );
   }
