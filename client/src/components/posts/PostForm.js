@@ -14,6 +14,12 @@ class PostForm extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
   onSubmit = e => {
     e.preventDefault();
 
@@ -33,12 +39,6 @@ class PostForm extends Component {
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
-    }
-  }
 
   render() {
     const { errors } = this.state;
