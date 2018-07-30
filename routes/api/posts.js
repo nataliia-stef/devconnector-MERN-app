@@ -106,12 +106,12 @@ router.post(
             res
               .status(400)
               .json({ alreadyliked: 'User already liked this post' });
+          } else {
+            //Add the user id to the likes array
+            post.likes.push({ user: req.user.id });
+
+            post.save().then(post => res.json(post));
           }
-
-          //Add the user id to the likes array
-          post.likes.push({ user: req.user.id });
-
-          post.save().then(post => res.json(post));
         })
         .catch(() =>
           res.status(404).json({ postnotfound: "Post doesn't exist" })
@@ -120,7 +120,7 @@ router.post(
   }
 );
 
-//@route   POST api/posts/like/:id
+//@route   POST api/posts/unlike/:id
 //@desc    Unlike a Post
 //@acess   Private
 router.post(
