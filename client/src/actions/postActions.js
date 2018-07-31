@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { clearErrors } from './profileActions';
 
 import {
   ADD_POST,
@@ -11,6 +12,7 @@ import {
 
 //Add post
 export const addPost = postData => dispatch => {
+  dispatch(clearErrors());
   axios
     .post('/api/posts', postData)
     .then(res => dispatch({ type: ADD_POST, payload: res.data }))
@@ -61,8 +63,17 @@ export const removeLike = id => dispatch => {
 
 //Add Comment
 export const addComment = (postID, newComment) => dispatch => {
+  dispatch(clearErrors());
   axios
     .post(`/api/posts/comment/${postID}`, newComment)
+    .then(res => dispatch({ type: GET_POST, payload: res.data }))
+    .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};
+
+//Delete Comment
+export const deleteComment = (postID, commentID) => dispatch => {
+  axios
+    .delete(`/api/posts/comment/${postID}/${commentID}`)
     .then(res => dispatch({ type: GET_POST, payload: res.data }))
     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };
