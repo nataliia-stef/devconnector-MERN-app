@@ -34,7 +34,9 @@ class CommentForm extends Component {
     };
 
     this.props.addComment(postID, newComment);
-    this.setState({ text: '' });
+    if (this.state.text.length > 10) {
+      this.setState({ text: '' });
+    }
   };
 
   onChange = e => {
